@@ -1,15 +1,14 @@
 Code and other details for the paper `Classifying Organisms and Artefacts by Their Shapes' by Arianna Salili-James et al.
 
-This repository contains Python and Jupyter Notebook code for the following roles:
+This repository contains Python and Jupyter Notebook code for the following tasks:
 
 (1) Curve extraction from images. In the contourExtraction folder. 
+
 (2) Computation of distances by various methods. In the computeDistances folder broken down by method. Note that other packages are needed:
+
     (i) SRVF requires fdasrsf from https://github.com/jdtuck/fdasrsf_python Includes the code to compute the Karcher mean shapes.
     (ii) geometric currents requires https://github.com/olivierverdier/femshape
     (iii) LDDMM requires https://github.com/tonyshardlow/reg_sde
     (iv) Eigenshapes is stand-alone. Includes the code to compute the standard mean shapes.
+    
 (3) Data analysis. In KNN_Classification
-
-contourExtraction  datasets.txt  geodesicDistances  KarcherMean  KNN_Classification
-
-Parameters for each method were chosen experimentally based on the training data, and the upper-triangular distance matrix between all pairs of shapes computed for each method. \emph{Eigenshapes}: We used the points that parameterise the curve as semi-landmarks. We experimented with optimising the position of these landmarks, but it was computationally expensive and did not improve the results. We computed the principal components of the point coordinates of all shapes and, from these, the Euclidean distances among them using the first $d$-dimensions, where $d$ was chosen based on the amount of the variance explained, ranging from $0.75$ to $0.999$.  \emph{LDDMM}: We used the implementation described in \cite{langevin_2017} available at \url{https://github.com/tonyshardlow/reg_sde}, running for 20 timesteps. \emph{SRVF}: We used the fdasrsf library available at \url{https://github.com/jdtuck/fdasrsf_python}. For closed curves, we used the  Path-Straightening algorithm described in \cite{path_st_2011} and available in the fdasrsf library. The algorithm transforms one shape to another in $\kappa \geq 2$ steps. The output is the geodesic distance, which is the inner product in SRVF space between the first shape and the final shape in the transformation. To compute our distance matrix, we set $\kappa=2$. For open curves the points were presented in pre-defined order, and these points cannot be translated; this removes the rotations. The geodesic distances between open curves were computed using the default parameters in the fdasrsf library. This computation includes an additional re-sampling step, where curves were interpolated at 100 points using a univariate spline fit. \emph{Geometric currents}: we used the method described by \cite{currents} available at \url{https://github.com/olivierverdier/femshape}. This implementation takes three parameters: a non-negative integer, $s$, determining the size of the matrix representation; the mesh-size, $m$; and a scaling parameter, $\sigma \geq 0$. We tested three options for each parameter where $ 1 \leq s,\sigma \leq 4$ and $16 \leq m \leq 24$.
