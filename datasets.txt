@@ -1,7 +1,0 @@
-The three datasets used in the paper are available at:
-
-Vases: \url{10.6084/m9.figshare.14551002} 
-
-Leaves: \url{10.6084/m9.figshare.14551005} 
-
-Shells: \url{10.6084/m9.figshare.14551044}.
